@@ -1,0 +1,9 @@
+"""Main app"""
+import customtkinter
+
+class App(customtkinter.CTk):
+    """Application class"""
+    def __init__(self):
+        super().__init__()
+
+        self.title("customtkinter application")

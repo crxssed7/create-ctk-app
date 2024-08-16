@@ -1,0 +1,12 @@
+"""customtkinter desktop application"""
+import customtkinter
+
+from config import APPEARANCE_MODE, DEFAULT_COLOR_THEME
+from app.app import App
+
+customtkinter.set_appearance_mode(APPEARANCE_MODE)
+customtkinter.set_default_color_theme(DEFAULT_COLOR_THEME)
+
+if __name__ == "__main__":
+    a = App()
+    a.mainloop()

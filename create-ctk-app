@@ -1,0 +1,70 @@
+#!/bin/bash
+
+project_name=$1
+if [ -z "$project_name" ]; then
+    echo "You must specify a project name"
+    exit 1
+fi
+
+script_dir="$(dirname "$(realpath "$0")")"
+template_dir="$script_dir/templates"
+
+# Declare folder paths
+working_dir=`pwd`
+project_dir="$working_dir/$project_name"
+
+app_dir="$project_dir/app"
+controllers_dir="$app_dir/controllers"
+views_dir="$app_dir/views"
+models_dir="$app_dir/models"
+utils_dir="$app_dir/utils"
+
+assets_dir="$project_dir/assets"
+images_dir="$assets_dir/images"
+
+tests_dir="$project_dir/tests"
+
+# Create folders
+mkdir $project_dir
+
+mkdir $app_dir
+mkdir $controllers_dir
+mkdir $views_dir
+mkdir $models_dir
+mkdir $utils_dir
+
+mkdir $assets_dir
+mkdir $images_dir
+
+mkdir $tests_dir
+
+# Declare files
+app_entry="$project_dir/main.py"
+config="$project_dir/config.py"
+readme="$project_dir/README.md"
+gitignore="$project_dir/.gitignore"
+editorconfig="$project_dir/.editorconfig"
+
+app_class="$app_dir/app.py"
+
+# Create files
+touch $readme
+
+echo "# $project_name" > $readme
+
+templates=("$gitignore" "$app_entry" "$config" "$editorconfig" "$app_class")
+for template in "${templates[@]}"; do
+    file=`basename $template`
+    cp "$template_dir/$file.template" $template
+done
+
+# Create packages
+packages=("$app_dir" "$controllers_dir" "$views_dir" "$models_dir" "$utils_dir" "$tests_dir")
+for package in "${packages[@]}"; do
+    touch "$package/__init__.py"
+done
+
+cd $project_dir
+python -m venv .venv
+pipenv install customtkinter
+cd $working_dir

@@ -1,0 +1,3 @@
+"""Configs and globals constants"""
+APPEARANCE_MODE = "System"
+DEFAULT_COLOR_THEME = "blue"
