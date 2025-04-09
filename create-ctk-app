@@ -22,7 +22,7 @@ utils_dir="$app_dir/utils"
 assets_dir="$project_dir/assets"
 images_dir="$assets_dir/images"
 
-tests_dir="$project_dir/tests"
+tests_dir="$project_dir/spec"
 
 # Create folders
 mkdir $project_dir
@@ -41,18 +41,20 @@ mkdir $tests_dir
 # Declare files
 app_entry="$project_dir/main.py"
 config="$project_dir/config.py"
+dotenv="$project_dir/.env"
 readme="$project_dir/README.md"
 gitignore="$project_dir/.gitignore"
 editorconfig="$project_dir/.editorconfig"
-
 app_class="$app_dir/app.py"
+spec_helper="$tests_dir/spec_helper.py"
+example_spec="$tests_dir/example_spec.py"
 
 # Create files
 touch $readme
 
 echo "# $project_name" > $readme
 
-templates=("$gitignore" "$app_entry" "$config" "$editorconfig" "$app_class")
+templates=("$gitignore" "$app_entry" "$config" "$editorconfig" "$app_class" "$spec_helper" "$example_spec" "$dotenv")
 for template in "${templates[@]}"; do
     file=`basename $template`
     cp "$template_dir/$file.template" $template
@@ -66,5 +68,5 @@ done
 
 cd $project_dir
 python -m venv .venv
-pipenv install customtkinter
+pipenv install customtkinter mamba expects doublex doublex-expects
 cd $working_dir

@@ -1,0 +1,6 @@
+from mamba import description, it
+from expects import expect, equal
+
+with description('Example') as self:
+    with it('equals true'):
+        expect(True).to(equal(True))
